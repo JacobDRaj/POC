@@ -1,0 +1,230 @@
+2026-07-07 11:05:36,652 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 11:05:36,653 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:00:34,234 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 12:00:34,234 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:02:15,653 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 12:02:15,655 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:02:28,877 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 12:02:28,880 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:02:29,701 [INFO] bankruptcy_genbi - Loaded and cleaned CSV | shape=(4500, 102)
+2026-07-07 12:02:30,667 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 12:02:30,667 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:02:42,428 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 12:02:42,428 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:03:04,325 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 12:03:04,391 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:03:43,140 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 12:03:43,142 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:03:47,423 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 12:03:47,426 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:03:52,881 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 12:03:52,882 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:03:56,702 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 12:03:56,702 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:03:56,752 [INFO] config - Using AWS Bedrock backend | model=anthropic.claude-3-haiku-20240307-v1:0 prompt_chars=20571
+2026-07-07 12:03:59,714 [WARNING] config - Bedrock call with anthropic.claude-3-haiku-20240307-v1:0 failed: You must specify a region.. Trying fallback model meta.llama3-8b-instruct-v1:0
+2026-07-07 12:03:59,716 [ERROR] config - Fallback Bedrock model meta.llama3-8b-instruct-v1:0 also failed: cannot access local variable 'bedrock_client' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\Users\johns\Downloads\codebase24June\config.py", line 478, in call_llm_haiku2
+    bedrock_client = boto3.client(
+                     ^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\boto3\__init__.py", line 93, in client
+    return _get_default_session().client(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\boto3\session.py", line 337, in client
+    return self._session.create_client(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\session.py", line 1031, in create_client
+    client = client_creator.create_client(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\client.py", line 161, in create_client
+    client_args = self._get_client_args(
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\client.py", line 561, in _get_client_args
+    return args_creator.get_client_args(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\args.py", line 121, in get_client_args
+    final_args = self.compute_client_args(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\args.py", line 265, in compute_client_args
+    endpoint_config = self._compute_endpoint_config(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\args.py", line 459, in _compute_endpoint_config
+    return self._resolve_endpoint(**resolve_endpoint_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\args.py", line 577, in _resolve_endpoint
+    return endpoint_bridge.resolve(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\client.py", line 675, in resolve
+    resolved = self.endpoint_resolver.construct_endpoint(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\regions.py", line 237, in construct_endpoint
+    result = self._endpoint_for_partition(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\regions.py", line 285, in _endpoint_for_partition
+    raise NoRegionError()
+botocore.exceptions.NoRegionError: You must specify a region.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\johns\Downloads\codebase24June\config.py", line 520, in call_llm_haiku2
+    response = bedrock_client.converse(
+               ^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'bedrock_client' where it is not associated with a value
+2026-07-07 12:03:59,850 [ERROR] bankruptcy_genbi - Error generating dynamic suggestions: Both Bedrock models failed: cannot access local variable 'bedrock_client' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\Users\johns\Downloads\codebase24June\config.py", line 478, in call_llm_haiku2
+    bedrock_client = boto3.client(
+                     ^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\boto3\__init__.py", line 93, in client
+    return _get_default_session().client(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\boto3\session.py", line 337, in client
+    return self._session.create_client(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\session.py", line 1031, in create_client
+    client = client_creator.create_client(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\client.py", line 161, in create_client
+    client_args = self._get_client_args(
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\client.py", line 561, in _get_client_args
+    return args_creator.get_client_args(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\args.py", line 121, in get_client_args
+    final_args = self.compute_client_args(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\args.py", line 265, in compute_client_args
+    endpoint_config = self._compute_endpoint_config(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\args.py", line 459, in _compute_endpoint_config
+    return self._resolve_endpoint(**resolve_endpoint_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\args.py", line 577, in _resolve_endpoint
+    return endpoint_bridge.resolve(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\client.py", line 675, in resolve
+    resolved = self.endpoint_resolver.construct_endpoint(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\regions.py", line 237, in construct_endpoint
+    result = self._endpoint_for_partition(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\.venv\Lib\site-packages\botocore\regions.py", line 285, in _endpoint_for_partition
+    raise NoRegionError()
+botocore.exceptions.NoRegionError: You must specify a region.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\johns\Downloads\codebase24June\config.py", line 520, in call_llm_haiku2
+    response = bedrock_client.converse(
+               ^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'bedrock_client' where it is not associated with a value
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\johns\Downloads\codebase24June\query_box.py", line 381, in _generate_dynamic_prompt_suggestions
+    response = call_llm_haiku2(prompt)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\johns\Downloads\codebase24June\config.py", line 545, in call_llm_haiku2
+    raise RuntimeError(f"Both Bedrock models failed: {fallback_err}")
+RuntimeError: Both Bedrock models failed: cannot access local variable 'bedrock_client' where it is not associated with a value
+2026-07-07 12:05:55,444 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 12:05:55,446 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:05:58,413 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 12:05:58,413 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:06:06,443 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 12:06:06,444 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:06:06,621 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 12:06:06,621 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:06:06,833 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 12:06:06,836 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:06:06,842 [INFO] config - Using AWS Bedrock backend | model=anthropic.claude-3-haiku-20240307-v1:0 prompt_chars=20571
+2026-07-07 12:06:10,342 [INFO] config - Bedrock response received | elapsed_ms=3499.85 response_chars=592
+2026-07-07 12:06:10,344 [INFO] bankruptcy_genbi - Generated suggestions via Haiku2: {
+  "textual": [
+    "What is the distribution of bankruptcy chapters across the dataset?",
+    "Which states have the highest number of active bankruptcy cases?",
+    "How do bankruptcy filings vary by month and year?",
+    "Which attorneys have the most bankruptcy cases and what is their success rate?"
+  ],
+  "visual": [
+    "Pie chart for the distribution of bankruptcy chapters",
+    "Bar chart of active bankruptcy cases by state",
+    "Line chart showing monthly and annual bankruptcy filing trends",
+    "Bar chart comparing bankruptcy case volume and success rate by attorney"
+  ]
+}
+2026-07-07 12:06:10,354 [INFO] bankruptcy_genbi - Processing user query: How many total bankruptcy filings are there?
+2026-07-07 12:06:10,358 [INFO] config - Using AWS Bedrock backend | model=anthropic.claude-3-haiku-20240307-v1:0 prompt_chars=15771
+2026-07-07 12:06:12,418 [INFO] config - Bedrock response received | elapsed_ms=2059.58 response_chars=220
+2026-07-07 12:06:12,419 [INFO] bankruptcy_genbi - Smart query understanding response: {
+  "normalized_query": "Retrieve the total count of bankruptcy filings",
+  "intent": "aggregation",
+  "relevant_columns": ["record_type"],
+  "time_filter": null,
+  "is_answerable": true,
+  "clarification_needed": null
+}
+2026-07-07 12:06:12,420 [INFO] bankruptcy_genbi - Query understanding | intent=aggregation | answerable=True | normalized=Retrieve the total count of bankruptcy filings
+2026-07-07 12:06:12,421 [INFO] bankruptcy_genbi - Executing pipeline for user question: How many total bankruptcy filings are there?
+2026-07-07 12:06:12,433 [INFO] config - Local prompt cache initialized | database=.litellm_prompt_cache.db
+2026-07-07 12:06:12,438 [WARNING] config - LangChain LiteLLM caching unavailable. Install langchain, langchain-litellm, and langchain-community to enable caching.
+2026-07-07 12:06:12,438 [INFO] config - Using AWS Bedrock backend | model=anthropic.claude-3-haiku-20240307-v1:0 prompt_chars=1607
+2026-07-07 12:06:13,770 [INFO] config - Bedrock response received | elapsed_ms=1331.44 response_chars=29
+2026-07-07 12:06:13,789 [INFO] config - Stored prompt cache entry | model=anthropic.claude-3-haiku-20240307-v1:0 prompt_hash=ae1890be190d0354732d4d586917f2e66857fcb6b5d1d167cbb803d1f54e8393
+2026-07-07 12:06:13,964 [INFO] bankruptcy_genbi - Pipeline Step 1: Intent Classifier -> aggregation
+2026-07-07 12:06:13,965 [WARNING] config - LangChain LiteLLM caching unavailable. Install langchain, langchain-litellm, and langchain-community to enable caching.
+2026-07-07 12:06:13,965 [INFO] config - Using AWS Bedrock backend | model=anthropic.claude-3-haiku-20240307-v1:0 prompt_chars=8062
+2026-07-07 12:06:16,169 [INFO] config - Bedrock response received | elapsed_ms=2203.23 response_chars=380
+2026-07-07 12:06:16,176 [INFO] config - Stored prompt cache entry | model=anthropic.claude-3-haiku-20240307-v1:0 prompt_hash=1f7de5dcdca0ae898d4ba46d2a03da9e3828e55469ec483146d64c9ef00a1e89
+2026-07-07 12:06:16,189 [INFO] bankruptcy_genbi - Pipeline Step 2: Entity Extractor -> {"status": null, "chapter": null, "state": null, "date_or_year": null, "attorney_name": null, "debtor_name": null, "match_code": null, "client_name": null, "city": null, "trustee_name": null, "trustee_city": null, "sort_by_field": null, "aggregation_type": "count", "group_by_fields": [], "limit": null, "sort_order": null, "record_type": null}
+2026-07-07 12:06:16,190 [WARNING] config - LangChain LiteLLM caching unavailable. Install langchain, langchain-litellm, and langchain-community to enable caching.
+2026-07-07 12:06:16,190 [INFO] config - Using AWS Bedrock backend | model=anthropic.claude-3-haiku-20240307-v1:0 prompt_chars=15384
+2026-07-07 12:06:18,875 [INFO] config - Bedrock response received | elapsed_ms=2685.90 response_chars=549
+2026-07-07 12:06:18,888 [INFO] config - Stored prompt cache entry | model=anthropic.claude-3-haiku-20240307-v1:0 prompt_hash=8428e24f0dcb8d02d9eca6b39f45cf8f2300b05bb2f7d3743e68f385804d4af5
+2026-07-07 12:06:18,904 [INFO] bankruptcy_genbi - Pipeline Step 3: Column Mapper -> {"status": "status", "chapter": "chapter", "state": "state", "date_or_year": "date_filed", "attorney_name": ["attorney_first_name", "attorney_last_name", "attorney_dba"], "debtor_name": ["first_name", "last_name"], "match_code": "match_code", "client_name": "client_name", "city": "city", "trustee_name": "trustee_name", "trustee_city": "trustee_city", "sort_by_field": "match_score", "aggregation_type": "count", "group_by_fields": ["date_filed"], "limit": null, "sort_order": null, "record_type": "record_type"}
+2026-07-07 12:06:18,931 [INFO] bankruptcy_genbi - Loaded sample knowledge from sample_data.csv (20 rows)
+2026-07-07 12:06:18,951 [WARNING] config - LangChain LiteLLM caching unavailable. Install langchain, langchain-litellm, and langchain-community to enable caching.
+2026-07-07 12:06:18,952 [INFO] config - Using AWS Bedrock backend | model=anthropic.claude-3-haiku-20240307-v1:0 prompt_chars=21506
+2026-07-07 12:06:20,767 [INFO] config - Bedrock response received | elapsed_ms=1815.57 response_chars=66
+2026-07-07 12:06:20,786 [INFO] config - Stored prompt cache entry | model=anthropic.claude-3-haiku-20240307-v1:0 prompt_hash=ee81df9646106821855277ac7e5f48bd960d28896ca41f309017ee0a1feda6a7
+2026-07-07 12:06:20,809 [INFO] bankruptcy_genbi - Pipeline Step 4: SQL Builder -> SELECT COUNT(*) AS total_filings FROM uploaded_data
+2026-07-07 12:06:20,810 [WARNING] config - LangChain LiteLLM caching unavailable. Install langchain, langchain-litellm, and langchain-community to enable caching.
+2026-07-07 12:06:20,810 [INFO] config - Using AWS Bedrock backend | model=anthropic.claude-3-haiku-20240307-v1:0 prompt_chars=14392
+2026-07-07 12:06:22,691 [INFO] config - Bedrock response received | elapsed_ms=1880.86 response_chars=16
+2026-07-07 12:06:22,702 [INFO] config - Stored prompt cache entry | model=anthropic.claude-3-haiku-20240307-v1:0 prompt_hash=0b634002388dc753f5362cecff2de5fc85270699ed93e74d66c976b4b9b6affc
+2026-07-07 12:06:22,707 [INFO] bankruptcy_genbi - SQL Validation Response:
+{"VALID": "YES"}
+2026-07-07 12:06:22,707 [INFO] bankruptcy_genbi - Pipeline Step 5: SQL Validator -> {"is_valid": true, "status": "VALID", "explanation": "Query is valid", "repaired_query": null}
+2026-07-07 12:06:22,709 [INFO] bankruptcy_genbi - Executing SQLite SQL: SELECT COUNT(*) AS total_filings FROM uploaded_data
+2026-07-07 12:06:22,719 [INFO] bankruptcy_genbi - Executed query successfully | returned 1 rows
+2026-07-07 12:06:22,720 [INFO] bankruptcy_genbi - Pipeline Step 6: Execute SQLite -> Success, fetched 1 rows
+2026-07-07 12:06:22,741 [INFO] bankruptcy_genbi - Created temporary table | name=temp_result_182723 | rows=1 | columns=1
+2026-07-07 12:06:22,748 [INFO] bankruptcy_genbi - Query processed successfully | rows=1 | chart_type=auto | temp_table=temp_result_182723
+2026-07-07 12:06:22,901 [INFO] bankruptcy_genbi - Starting Bankruptcy application
+2026-07-07 12:06:22,901 [INFO] bankruptcy_genbi - === Session run initiated ===
+2026-07-07 12:06:22,921 [INFO] config - Using AWS Bedrock backend | model=anthropic.claude-3-haiku-20240307-v1:0 prompt_chars=21472
+2026-07-07 12:06:25,858 [INFO] config - Bedrock response received | elapsed_ms=2936.53 response_chars=510
+2026-07-07 12:06:25,859 [INFO] bankruptcy_genbi - Generated suggestions via Haiku2: {
+  "textual": [
+    "What is the top state by number of bankruptcy filings?",
+    "How do the bankruptcy filing counts vary by chapter?",
+    "Which bankruptcy status has the highest number of cases?",
+    "Identify the top 5 client names by bankruptcy filings."
+  ],
+  "visual": [
+    "Bar chart of bankruptcy filings by state",
+    "Pie chart of bankruptcy filings by chapter",
+    "Donut chart for bankruptcy case status distribution",
+    "Horizontal bar chart comparing top client names by filings"
+  ]
+}
