@@ -12,6 +12,8 @@ import plotly.graph_objects as go
 from config import call_llm, call_llm_haiku, call_llm_with_cache, count_token_usage
 from dotenv import load_dotenv
 from insights_generator import generate_insights
+from utils.logger import logger
+from utils.dataframe import load_and_clean_csv
 from forecasting_engine import (
     load_monthly_series,
     run_filing_forecast,
@@ -20,42 +22,61 @@ from forecasting_engine import (
     detect_state_anomalies,
     get_risk_heatmap_data,
 )
-from query_box import (
-    load_schema,
-    get_db_table_name,
-    get_actual_database_schema,
-    extract_sql_from_response,
-    generate_sql_from_question,
-    validate_sql_with_judge,
-    clean_sql_for_whitespace,
-    execute_sql_query,
-    should_generate_insights,
-    detect_chart_type,
-    _make_query_cache_key,
+# from query_box import (
+#     load_schema,
+#     get_db_table_name,
+#     get_actual_database_schema,
+#     extract_sql_from_response,
+#     generate_sql_from_question,
+#     validate_sql_with_judge,
+#     clean_sql_for_whitespace,
+#     execute_sql_query,
+#     should_generate_insights,
+#     detect_chart_type,
+#     _make_query_cache_key,
+#     create_temporary_table_from_dataframe,
+#     drop_temporary_table,
+#     is_followup_question,
+#     _initialize_conversation_memory,
+#     _append_conversation_memory,
+#     _handle_user_query,
+#     render_query_box_tab,
+#     _load_and_clean_csv,
+# )
+from query_box import render_query_box_tab
+from query.handler import _handle_user_query
+from query.history import (
+    _initialize_conversation_memory,
+    _append_conversation_memory,
     create_temporary_table_from_dataframe,
     drop_temporary_table,
     is_followup_question,
-    _initialize_conversation_memory,
-    _append_conversation_memory,
-    _handle_user_query,
-    render_query_box_tab,
-    _load_and_clean_csv,
 )
+
+from query.pipeline import generate_sql_from_question
+from query.sql_executor import (
+    execute_sqlite,
+    execute_sql_query,
+    clean_sql_for_whitespace,
+    validate_sql_with_judge,
+)
+from query.suggestion import (clean_and_validate_suggestions, _generate_dynamic_prompt_suggestions)
+from query.chart import (is_chart_request, 
+                         is_pure_chart_request, 
+                         detect_chart_type, 
+                         should_generate_insights)
+
+
+from query.handler import (_handle_user_query)
+
+from utils.formatter import to_bold_unicode, format_table
+from utils.cache import _make_query_cache_key
+from database.schema_loader import load_schema, get_db_table_name, get_actual_database_schema
 
 
 
 load_dotenv()
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(name)s - %(message)s",
-    handlers=[
-        logging.StreamHandler(sys.stdout),
-        logging.FileHandler("bankruptcy_genbi.log", encoding="utf-8"),
-    ],
-    force=True,
-)
-logger = logging.getLogger("bankruptcy_genbi")
 
 st.set_page_config(
     page_title="RiskIntel Portal",
@@ -1648,7 +1669,7 @@ def main():
         st.session_state.messages = [
             {
                 "role": "assistant",
-                "content": " **Welcome to GenBI Assistant!** "
+                "content": " **Welcome to GenAI Assistant!** "
             }
         ]
 
@@ -1895,7 +1916,7 @@ def main():
 
             if file_changed:
                 with st.spinner("Processing dataset..."):
-                    df = _load_and_clean_csv(uploaded_file)
+                    df = load_and_clean_csv(uploaded_file)
 
                     if df is not None:
                         conn = sqlite3.connect('data.db')
@@ -2436,7 +2457,7 @@ def main():
                             det_col1, det_col2 = st.columns([1, 2.5])
                             with det_col1:
                                 score_field = get_actual_col('match_score', case_row.keys())
-                                score = float(case_row.get(score_field, 0)) if score_field else 0.0
+                                score = float(case_row[score_field]) if score_field and score_field in case_row else 0.0
                                 
                                 fig_gauge = go.Figure(go.Indicator(
                                     mode = "gauge+number",

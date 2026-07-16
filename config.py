@@ -3,6 +3,7 @@ import logging
 import time
 import sqlite3
 import hashlib
+from utils.logger import logger
 import importlib
 try:
     import boto3
@@ -39,12 +40,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-logger = logging.getLogger(__name__)
-if not logger.handlers:
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
-    )
 
 # Hugging Face client config kept as reference only.
 # Uncomment this block if you want to switch back to HF later.
